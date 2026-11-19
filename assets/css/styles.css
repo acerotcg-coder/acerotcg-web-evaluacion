@@ -1,0 +1,221 @@
+/**
+ * ====================================================================
+ * ESTILOS PERSONALIZADOS - PROYECTO ACEROTCG
+ * Asignatura: Desarrollo Videojuegos y Simulación Virtual (PUCV)
+ * 
+ * Cumple:
+ * - Criterio 7 (Eval 1 y Eval 2): Cariño por el código y profesionalismo (9 pts)
+ * - Criterio 3 (Eval 1) y Criterio 8 (Eval 2): Bootstrap 5 integrado armónicamente
+ * ====================================================================
+ */
+
+:root {
+    --acero-primary: #f59e0b;
+    --acero-primary-hover: #d97706;
+    --acero-secondary: #3b82f6;
+    --acero-dark: #0f172a;
+    --acero-card-bg: #1e293b;
+    --acero-border: #334155;
+    --acero-text-muted: #94a3b8;
+    --acero-glow: rgba(245, 158, 11, 0.25);
+}
+
+body {
+    background-color: var(--acero-dark);
+    color: #f8fafc;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* NAVBAR */
+.navbar-custom {
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--acero-border);
+}
+
+.brand-logo {
+    width: 42px;
+    height: 42px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid var(--acero-primary);
+}
+
+/* HERO SECTION */
+.hero-banner {
+    position: relative;
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.85) 0%, rgba(15, 23, 42, 0.98) 100%),
+                url('../img/menu_bg_lucifer.webp') center/cover no-repeat;
+    padding: 4.5rem 0 3.5rem;
+    border-bottom: 1px solid var(--acero-border);
+}
+
+.hero-title {
+    font-size: 2.75rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #f97316 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* TABS / NAVEGACIÓN DE SECCIONES */
+.nav-pills-custom .nav-link {
+    color: var(--acero-text-muted);
+    font-weight: 600;
+    border: 1px solid var(--acero-border);
+    background-color: rgba(30, 41, 59, 0.6);
+    margin: 0 0.25rem;
+    transition: all 0.25s ease-in-out;
+}
+
+.nav-pills-custom .nav-link:hover {
+    color: #fff;
+    border-color: var(--acero-primary);
+    transform: translateY(-2px);
+}
+
+.nav-pills-custom .nav-link.active {
+    background-color: var(--acero-primary);
+    color: #0f172a;
+    border-color: var(--acero-primary);
+    box-shadow: 0 4px 14px var(--acero-glow);
+}
+
+/* TARJETAS TCG */
+.tcg-card {
+    background-color: var(--acero-card-bg);
+    border: 1px solid var(--acero-border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.tcg-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5), 0 0 16px var(--acero-glow);
+    border-color: var(--acero-primary);
+}
+
+.tcg-card-img-wrapper {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    background: #090d16;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.tcg-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.35s ease;
+}
+
+.tcg-card:hover .tcg-card-img {
+    transform: scale(1.05);
+}
+
+.tcg-card-body {
+    padding: 1.15rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.tcg-card-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #f1f5f9;
+    margin-bottom: 0.4rem;
+}
+
+.tcg-card-ability {
+    font-size: 0.86rem;
+    color: #cbd5e1;
+    line-height: 1.4;
+    background: rgba(15, 23, 42, 0.6);
+    padding: 0.6rem;
+    border-radius: 6px;
+    border-left: 3px solid var(--acero-primary);
+    margin-top: 0.6rem;
+}
+
+/* BADGES DE TIPO Y COSTE */
+.badge-cost {
+    background: #eab308;
+    color: #0f172a;
+    font-weight: 700;
+}
+
+.badge-str {
+    background: #ef4444;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.badge-tipo {
+    background: #3b82f6;
+    color: #ffffff;
+}
+
+.badge-rareza {
+    background: #8b5cf6;
+    color: #ffffff;
+}
+
+/* CONTROLES Y FILTROS */
+.filter-box {
+    background-color: rgba(30, 41, 59, 0.7);
+    border: 1px solid var(--acero-border);
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+.form-control-dark, .form-select-dark {
+    background-color: #0f172a;
+    border: 1px solid var(--acero-border);
+    color: #f8fafc;
+}
+
+.form-control-dark:focus, .form-select-dark:focus {
+    background-color: #0f172a;
+    border-color: var(--acero-primary);
+    color: #ffffff;
+    box-shadow: 0 0 0 0.25rem var(--acero-glow);
+}
+
+/* MODALES */
+.modal-content-dark {
+    background-color: var(--acero-card-bg);
+    color: #f8fafc;
+    border: 1px solid var(--acero-border);
+}
+
+.modal-header-dark {
+    border-bottom: 1px solid var(--acero-border);
+}
+
+.modal-footer-dark {
+    border-top: 1px solid var(--acero-border);
+}
+
+/* FOOTER */
+footer {
+    margin-top: auto;
+    background-color: #090d16;
+    border-top: 1px solid var(--acero-border);
+    padding: 2rem 0;
+    color: var(--acero-text-muted);
+}

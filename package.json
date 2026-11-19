@@ -1,0 +1,23 @@
+{
+  "name": "acerotcg-web-evaluacion",
+  "version": "1.0.0",
+  "description": "Proyecto Web API y Base de Datos - Pontificia Universidad Católica de Valparaíso (PUCV)",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "node --watch server/server.js"
+  },
+  "keywords": [
+    "acerotcg",
+    "web-api",
+    "database",
+    "bootstrap5",
+    "pucv"
+  ],
+  "author": "Equipo AceroTCG - PUCV",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
+  }
+}

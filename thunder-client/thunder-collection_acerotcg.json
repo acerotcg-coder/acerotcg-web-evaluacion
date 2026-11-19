@@ -1,0 +1,156 @@
+{
+  "clientName": "Thunder Client",
+  "collectionName": "AceroTCG - Evaluación Web API & DB",
+  "collectionId": "c8f2b34a-9d3e-4b21-81f7-acerotcg2026",
+  "dateExported": "2026-11-18",
+  "version": "1.2",
+  "folders": [],
+  "requests": [
+    {
+      "_id": "req_health_01",
+      "colId": "c8f2b34a-9d3e-4b21-81f7-acerotcg2026",
+      "containerId": "",
+      "name": "1. Health Check - Estado de la Base de Datos",
+      "url": "http://localhost:3000/api/health",
+      "method": "GET",
+      "sortNum": 10000,
+      "created": "2026-11-18T23:30:00.000Z",
+      "modified": "2026-11-18T23:30:00.000Z",
+      "headers": [],
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        },
+        {
+          "type": "res-body",
+          "custom": "status",
+          "action": "equal",
+          "value": "ok"
+        }
+      ]
+    },
+    {
+      "_id": "req_cartas_all_02",
+      "colId": "c8f2b34a-9d3e-4b21-81f7-acerotcg2026",
+      "containerId": "",
+      "name": "2. Obtener Todas las Cartas (DB)",
+      "url": "http://localhost:3000/api/cartas",
+      "method": "GET",
+      "sortNum": 20000,
+      "created": "2026-11-18T23:31:00.000Z",
+      "modified": "2026-11-18T23:31:00.000Z",
+      "headers": [],
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        }
+      ]
+    },
+    {
+      "_id": "req_cartas_filter_03",
+      "colId": "c8f2b34a-9d3e-4b21-81f7-acerotcg2026",
+      "containerId": "",
+      "name": "3. Filtrar Cartas por Tipo (Aliado)",
+      "url": "http://localhost:3000/api/cartas?tipo=Aliado",
+      "method": "GET",
+      "sortNum": 30000,
+      "created": "2026-11-18T23:32:00.000Z",
+      "modified": "2026-11-18T23:32:00.000Z",
+      "headers": [],
+      "params": [
+        {
+          "name": "tipo",
+          "value": "Aliado",
+          "isPath": false
+        }
+      ],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        }
+      ]
+    },
+    {
+      "_id": "req_carta_by_id_04",
+      "colId": "c8f2b34a-9d3e-4b21-81f7-acerotcg2026",
+      "containerId": "",
+      "name": "4. Obtener Carta por ID (ID: 1 - Lucifer)",
+      "url": "http://localhost:3000/api/cartas/1",
+      "method": "GET",
+      "sortNum": 40000,
+      "created": "2026-11-18T23:33:00.000Z",
+      "modified": "2026-11-18T23:33:00.000Z",
+      "headers": [],
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        }
+      ]
+    },
+    {
+      "_id": "req_post_carta_05",
+      "colId": "c8f2b34a-9d3e-4b21-81f7-acerotcg2026",
+      "containerId": "",
+      "name": "5. Registrar Nueva Carta en Base de Datos (POST)",
+      "url": "http://localhost:3000/api/cartas",
+      "method": "POST",
+      "sortNum": 50000,
+      "created": "2026-11-18T23:34:00.000Z",
+      "modified": "2026-11-18T23:34:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"nombre\": \"Dragón Titán de Acero\",\n  \"edicion\": \"Vigilantes de Acero\",\n  \"tipo\": \"Aliado\",\n  \"coste\": 5,\n  \"fuerza\": 7,\n  \"rareza\": \"Ultra Real\",\n  \"habilidad\": \"Furia. Inmune a efectos de cartas de coste 3 o menor. Cuando ataca, inflige 2 de daño directo al mazo oponente.\",\n  \"imagen_url\": \"assets/img/booster_vigilantes_lucifer.jpg\"\n}"
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "201"
+        }
+      ]
+    },
+    {
+      "_id": "req_mazos_06",
+      "colId": "c8f2b34a-9d3e-4b21-81f7-acerotcg2026",
+      "containerId": "",
+      "name": "6. Obtener Lista de Mazos (DB)",
+      "url": "http://localhost:3000/api/mazos",
+      "method": "GET",
+      "sortNum": 60000,
+      "created": "2026-11-18T23:35:00.000Z",
+      "modified": "2026-11-18T23:35:00.000Z",
+      "headers": [],
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        }
+      ]
+    }
+  ]
+}

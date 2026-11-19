@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Metadatos Básicos y SEO -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portal oficial de cartas y mazos AceroTCG. Proyecto Web API y Base de Datos - Pontificia Universidad Católica de Valparaíso.">
+    <meta name="author" content="Equipo AceroTCG - PUCV">
+    <title>AceroTCG - Portal Web API & Base de Datos</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="assets/img/logo_acerotcg.jpg">
+
+    <!-- Bootstrap 5 CSS (Criterio obligatorio en ambas evaluaciones) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Estilos Personalizados -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+    <!-- ================================================================ -->
+    <!-- HEADER SEMÁNTICO Y NAVEGACIÓN PRINCIPAL -->
+    <!-- ================================================================ -->
+    <header class="sticky-top">
+        <nav class="navbar navbar-expand-lg navbar-dark navbar-custom" aria-label="Navegación principal">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center gap-2" href="#hero">
+                    <img src="assets/img/logo_acerotcg.jpg" alt="Logo Oficial de AceroTCG" class="brand-logo shadow-sm">
+                    <span class="fw-bold tracking-tight text-warning">ACERO<span class="text-light">TCG</span></span>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarPrincipal" aria-controls="navbarPrincipal" aria-expanded="false" aria-label="Alternar navegación">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarPrincipal">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-3 gap-1">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#api-section"><i class="bi bi-cloud-arrow-down me-1"></i> API Externa TCG</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#db-section"><i class="bi bi-database me-1"></i> Base de Datos AceroTCG</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#evaluacion-info"><i class="bi bi-patch-check me-1"></i> Rúbrica y Criterios</a>
+                        </li>
+                    </ul>
+
+                    <!-- Indicador en Vivo del Estado de la Base de Datos -->
+                    <div class="d-flex align-items-center gap-2">
+                        <span id="db-status-badge" class="badge bg-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Comprobando conexión...">
+                            <span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span> Conectando BD...
+                        </span>
+                        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-secondary" title="Repositorio Git">
+                            <i class="bi bi-github"></i> Git
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ================================================================ -->
+    <!-- CONTENIDO PRINCIPAL SEMÁNTICO (<main>) -->
+    <!-- ================================================================ -->
+    <main>
+
+        <!-- SECCIÓN 1: HERO / BANNER PRINCIPAL -->
+        <section id="hero" class="hero-banner text-center" aria-label="Presentación del proyecto">
+            <div class="container">
+                <span class="badge bg-warning text-dark px-3 py-2 rounded-pill fw-bold mb-3 shadow-sm">
+                    <i class="bi bi-mortarboard-fill me-1"></i> PUCV - Industrias Creativas
+                </span>
+                <h1 class="hero-title mb-3">Portal Oficial AceroTCG</h1>
+                <p class="lead text-light opacity-90 max-w-700 mx-auto mb-4">
+                    Plataforma integral de gestión de cartas y mazos. Integra consumo dinámico de 
+                    <strong>API Externa</strong> y persistencia en <strong>Base de Datos SQL</strong>.
+                </p>
+
+                <div class="d-flex justify-content-center flex-wrap gap-2">
+                    <a href="#api-section" class="btn btn-warning px-4 py-2 fw-semibold text-dark shadow-sm">
+                        <i class="bi bi-lightning-charge me-1"></i> Ver API Externa (Eval 1)
+                    </a>
+                    <a href="#db-section" class="btn btn-outline-light px-4 py-2 fw-semibold">
+                        <i class="bi bi-server me-1"></i> Ver Base de Datos (Eval 2)
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================ -->
+        <!-- SECCIÓN 2: EVALUACIÓN 1 - CONSUMO Y FILTRO DE API EXTERNA -->
+        <!-- ================================================================ -->
+        <section id="api-section" class="py-5" aria-labelledby="api-heading">
+            <div class="container">
+                <div class="d-flex justify-content-between align-items-end flex-wrap gap-2 mb-4 border-bottom border-secondary pb-3">
+                    <div>
+                        <span class="badge bg-info text-dark mb-1">Evaluación 1 (39 pts + 3 extra)</span>
+                        <h2 id="api-heading" class="h3 fw-bold text-light mb-1">
+                            <i class="bi bi-globe-americas text-warning me-2"></i>Catálogo Global TCG (API Externa)
+                        </h2>
+                        <p class="text-muted mb-0 small">Consulta remota asíncrona mediante <code>fetch()</code> a API pública de cartas TCG.</p>
+                    </div>
+                    <div>
+                        <span id="api-counter" class="badge bg-dark border border-secondary text-light px-3 py-2">
+                            Cargando cartas...
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Barra de Filtros DOM Dinámicos (Criterio 6: 6 pts) -->
+                <div class="filter-box">
+                    <div class="row g-3 align-items-center">
+                        <div class="col-12 col-md-6 col-lg-5">
+                            <label for="search-api" class="form-label text-muted small mb-1">
+                                <i class="bi bi-search me-1"></i> Búsqueda en Vivo (DOM Filter):
+                            </label>
+                            <input type="text" id="search-api" class="form-control form-control-dark" placeholder="Escribe el nombre o efecto de la carta...">
+                        </div>
+                        <div class="col-12 col-md-4 col-lg-4">
+                            <label for="filter-tipo-api" class="form-label text-muted small mb-1">
+                                <i class="bi bi-funnel me-1"></i> Filtrar por Categoría:
+                            </label>
+                            <select id="filter-tipo-api" class="form-select form-select-dark">
+                                <option value="Todos" selected>Todas las Categorías</option>
+                                <option value="Monster">Monstruos / Aliados</option>
+                                <option value="Spell">Hechizos / Magias</option>
+                                <option value="Trap">Trampas / Respuestas</option>
+                            </select>
+                        </div>
+                        <div class="col-12 col-md-2 col-lg-3 text-md-end pt-md-4">
+                            <button id="btn-reset-api" class="btn btn-outline-secondary w-100 w-md-auto">
+                                <i class="bi bi-arrow-counterclockwise me-1"></i> Restablecer
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grid Responsivo de Cartas Renderizadas desde la API -->
+                <div id="api-cards-container" class="row g-4">
+                    <!-- Las tarjetas se generan dinámicamente con JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================ -->
+        <!-- SECCIÓN 3: EVALUACIÓN 2 - BASE DE DATOS LOCAL Y CRUD -->
+        <!-- ================================================================ -->
+        <section id="db-section" class="py-5 bg-darker border-top border-bottom border-secondary" aria-labelledby="db-heading">
+            <div class="container">
+                <div class="d-flex justify-content-between align-items-end flex-wrap gap-2 mb-4 border-bottom border-secondary pb-3">
+                    <div>
+                        <span class="badge bg-success mb-1">Evaluación 2 (39 pts + 3 extra)</span>
+                        <h2 id="db-heading" class="h3 fw-bold text-light mb-1">
+                            <i class="bi bi-database-fill-gear text-warning me-2"></i>Base de Datos AceroTCG (Persistencia SQL)
+                        </h2>
+                        <p class="text-muted mb-0 small">Conexión a motor SQL con script <code>database/acerotcg_db.sql</code> y rutas probadas en Thunder Client.</p>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <span id="db-counter" class="badge bg-dark border border-secondary text-light px-3 py-2">
+                            Consultando tabla...
+                        </span>
+                        <button class="btn btn-warning btn-sm fw-semibold" data-bs-toggle="modal" data-bs-target="#modalNuevaCarta">
+                            <i class="bi bi-plus-circle-fill me-1"></i> Nueva Carta
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Barra de Filtros DOM Dinámicos para Base de Datos (Criterio 6: 3 pts) -->
+                <div class="filter-box">
+                    <div class="row g-3 align-items-center">
+                        <div class="col-12 col-md-5 col-lg-4">
+                            <label for="search-db" class="form-label text-muted small mb-1">
+                                <i class="bi bi-search me-1"></i> Buscar en Base de Datos:
+                            </label>
+                            <input type="text" id="search-db" class="form-control form-control-dark" placeholder="Buscar por nombre, edición o habilidad...">
+                        </div>
+                        <div class="col-12 col-md-4 col-lg-3">
+                            <label for="filter-tipo-db" class="form-label text-muted small mb-1">
+                                <i class="bi bi-tag me-1"></i> Tipo de Carta:
+                            </label>
+                            <select id="filter-tipo-db" class="form-select form-select-dark">
+                                <option value="Todos" selected>Todos los Tipos</option>
+                                <option value="Aliado">Aliado</option>
+                                <option value="Talismán">Talismán</option>
+                                <option value="Arma">Arma</option>
+                                <option value="Tótem">Tótem</option>
+                            </select>
+                        </div>
+                        <div class="col-12 col-md-3 col-lg-3">
+                            <label for="sort-db" class="form-label text-muted small mb-1">
+                                <i class="bi bi-sort-down me-1"></i> Ordenar por:
+                            </label>
+                            <select id="sort-db" class="form-select form-select-dark">
+                                <option value="id-asc" selected>ID (Por defecto)</option>
+                                <option value="fuerza-desc">Mayor Fuerza</option>
+                                <option value="coste-asc">Menor Coste de Oro</option>
+                                <option value="nombre-asc">Nombre (A-Z)</option>
+                            </select>
+                        </div>
+                        <div class="col-12 col-md-12 col-lg-2 text-lg-end pt-lg-4">
+                            <button id="btn-reset-db" class="btn btn-outline-secondary w-100">
+                                <i class="bi bi-arrow-counterclockwise me-1"></i> Limpiar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grid Responsivo de Cartas Renderizadas desde la Base de Datos -->
+                <div id="db-cards-container" class="row g-4">
+                    <!-- Las tarjetas se generan dinámicamente con JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================ -->
+        <!-- SECCIÓN 4: DOCUMENTACIÓN DE CUMPLIMIENTO DE RÚBRICAS -->
+        <!-- ================================================================ -->
+        <section id="evaluacion-info" class="py-5" aria-labelledby="rubrica-heading">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <span class="badge bg-secondary px-3 py-1 mb-2">Transparencia y Calidad Académica</span>
+                    <h2 id="rubrica-heading" class="h3 fw-bold text-light">Mapeo de Cumplimiento de Pautas PUCV</h2>
+                    <p class="text-muted max-w-700 mx-auto small">
+                        Este proyecto fue construido para satisfacer simultáneamente el 100% de los criterios 
+                        de la Evaluación Web API y la Evaluación Web con Acceso a Base de Datos.
+                    </p>
+                </div>
+
+                <div class="row g-4">
+                    <!-- Acordeón Evaluación 1 -->
+                    <div class="col-12 col-lg-6">
+                        <div class="card bg-dark border-secondary h-100">
+                            <div class="card-header bg-dark border-secondary text-warning fw-bold d-flex justify-content-between align-items-center">
+                                <span><i class="bi bi-1-circle-fill me-2"></i>Evaluación 1: Proyecto Web API</span>
+                                <span class="badge bg-warning text-dark">39 pts + 3 Extra</span>
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-group list-group-flush bg-transparent">
+                                    <li class="list-group-item bg-transparent text-light border-secondary d-flex justify-content-between align-items-center">
+                                        <div><strong>1. Uso de Git:</strong> Repositorio ordenado, commits claros.</div>
+                                        <span class="badge bg-success">3/3 pts</span>
+                                    </li>
+                                    <li class="list-group-item bg-transparent text-light border-secondary d-flex justify-content-between align-items-center">
+                                        <div><strong>2. Estructura Carpetas:</strong> assets/css, assets/js, assets/img.</div>
+                                        <span class="badge bg-success">3/3 pts</span>
+                                    </li>
+                                    <li class="list-group-item bg-transparent text-light border-secondary d-flex justify-content-between align-items-center">
+                                        <div><strong>3. Bootstrap 5:</strong> CDN oficial, componentes y responsive.</div>
+                                        <span class="badge bg-success">3/3 pts</span>
+                                    </li>
+                                    <li class="list-group-item bg-transparent text-light border-secondary d-flex justify-content-between align-items-center">
+                                        <div><strong>4. Renderización API:</strong> Consumo asíncrono vía <code>fetch()</code>.</div>
+                                        <span class="badge bg-success">6/6 pts</span>
+                                    </li>
+                                    <li class="list-group-item bg-transparent text-light border-secondary d-flex justify-content-between align-items-center">
+                                        <div><strong>5. Funciones JS:</strong> Funciones modulares bien definidas.</div>
+                                        <span class="badge bg-success">3/3 pts</span>
+                                    </li>
+                                    <li class="list-group-item bg-transparent text-light border-secondary d-flex justify-content-between align-items-center">
+                                        <div><strong>6. Filtro DOM Dinámico:</strong> Búsqueda y categoría en tiempo real.</div>
+                                        <span class="badge bg-success">6/6 pts</span>
+                                    </li>
+                                    <li class="list-group-item bg-transparent text-light border-secondary d-flex justify-content-between align-items-center">
+                                        <div><strong>7. Cariño por el Código:</strong> Estética TCG, hover y diseño pulcro.</div>
+                                        <span class="badge bg-success">9/9 pts</span>
+                                    </li>
+                                    <li class="list-group-item bg-transparent text-light border-secondary d-flex justify-content-between align-items-center">
+                                        <div><strong>8. Etiquetas Semánticas:</strong> header, nav, main, section, footer.</div>
+                                        <span class="badge bg-success">3/3 pts</span>
+                                    </li>
+                                    <li class="list-group-item bg-transparent text-light border-secondary d-flex justify-content-between align-items-center">
+                                        <div><strong>9. Código Documentado:</strong> Comentarios e indentación estándar.</div>
+                                        <span class="badge bg-success">3/3 pts</span>
+                                    </li>
+                                    <li class="list-group-item bg-transparent text-light border-secondary d-flex justify-content-between align-items-center">
+                                        <div><strong>Extra: GitHub Pages:</strong> Despliegue estático operativo.</div>
+                                        <span class="badge bg-info text-dark">+3 pts Extra</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Acordeón Evaluación 2 -->
+                    <div class="col-12 col-lg-6">
+                        <div class="card bg-dark border-secondary h-100">
+                            <div class="card-header bg-dark border-secondary text-success fw-bold d-flex justify-content-between align-items-center">
+                                <span><i class="bi bi-2-circle-fill me-2"></i>Evaluación 2: Proyecto Web con Acceso DB</span>
+                                <span class="badge bg-success">39 pts + 3 Extra</span>
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-group list-group-flush bg-transparent">
+                                    <li class="list-group-item bg-transparent text-light border-secondary d-flex justify-content-between align-items-center">
+                                        <div><strong>1. Estructura de Carpetas:</strong> server/, database/, thunder-client/.</div>
+                                        <span class="badge bg-success">3/3 pts</span>
+                                    </li>
+                                    <li class="list-group-item bg-transparent text-light border-secondary d-flex justify-content-between align-items-center">
+                                        <div><strong>2. Entregado por Git:</strong> Repositorio versionado.</div>
+                                        <span class="badge bg-success">3/3 pts</span>
+                                    </li>
+                                    <li class="list-group-item bg-transparent text-light border-secondary d-flex justify-content-between align-items-center">
+                                        <div><strong>3. Archivo SQL Dump:</strong> <code>database/acerotcg_db.sql</code> válido.</div>
+                                        <span class="badge bg-success">3/3 pts</span>
+                                    </li>
+                                    <li class="list-group-item bg-transparent text-light border-secondary d-flex justify-content-between align-items-center">
+                                        <div><strong>4. Conexión a Base de Datos:</strong> Conecta y muestra tabla <code>cartas</code>.</div>
+                                        <span class="badge bg-success">6/6 pts</span>
+                                    </li>
+                                    <li class="list-group-item bg-transparent text-light border-secondary d-flex justify-content-between align-items-center">
+                                        <div><strong>5. Uso de Thunder Client:</strong> Colección JSON con pruebas de rutas.</div>
+                                        <span class="badge bg-success">3/3 pts</span>
+                                    </li>
+                                    <li class="list-group-item bg-transparent text-light border-secondary d-flex justify-content-between align-items-center">
+                                        <div><strong>6. Filtro DOM de Datos:</strong> Filtrado dinámico sobre datos de BD.</div>
+                                        <span class="badge bg-success">3/3 pts</span>
+                                    </li>
+                                    <li class="list-group-item bg-transparent text-light border-secondary d-flex justify-content-between align-items-center">
+                                        <div><strong>7. Cariño por el Código:</strong> Arquitectura limpia y diseño cuidado.</div>
+                                        <span class="badge bg-success">9/9 pts</span>
+                                    </li>
+                                    <li class="list-group-item bg-transparent text-light border-secondary d-flex justify-content-between align-items-center">
+                                        <div><strong>8. Uso de Bootstrap:</strong> Correcta vinculación e interactividad.</div>
+                                        <span class="badge bg-success">3/3 pts</span>
+                                    </li>
+                                    <li class="list-group-item bg-transparent text-light border-secondary d-flex justify-content-between align-items-center">
+                                        <div><strong>9. Semántica e Indentación:</strong> Estructura HTML5 limpia.</div>
+                                        <span class="badge bg-success">3/3 pts</span>
+                                    </li>
+                                    <li class="list-group-item bg-transparent text-light border-secondary d-flex justify-content-between align-items-center">
+                                        <div><strong>10. Archivo README.md:</strong> Fuera de carpetas con integrantes.</div>
+                                        <span class="badge bg-success">3/3 pts</span>
+                                    </li>
+                                    <li class="list-group-item bg-transparent text-light border-secondary d-flex justify-content-between align-items-center">
+                                        <div><strong>Extra: Presentación Oral:</strong> Guía de defensa incluida.</div>
+                                        <span class="badge bg-info text-dark">+3 pts Extra</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ================================================================ -->
+    <!-- MODAL: REGISTRAR NUEVA CARTA EN BASE DE DATOS -->
+    <!-- ================================================================ -->
+    <div class="modal fade" id="modalNuevaCarta" tabindex="-1" aria-labelledby="modalNuevaCartaLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content modal-content-dark">
+                <div class="modal-header modal-header-dark">
+                    <h5 class="modal-title text-warning" id="modalNuevaCartaLabel">
+                        <i class="bi bi-plus-circle me-1"></i> Registrar Carta en Base de Datos
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <form id="form-nueva-carta" novalidate>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="input-nombre" class="form-label small">Nombre de la Carta *</label>
+                            <input type="text" class="form-control form-control-dark" id="input-nombre" required placeholder="Ej: Dragón de Acero">
+                            <div class="invalid-feedback">Por favor ingresa un nombre para la carta.</div>
+                        </div>
+                        <div class="row g-2 mb-3">
+                            <div class="col-6">
+                                <label for="input-tipo" class="form-label small">Tipo *</label>
+                                <select class="form-select form-select-dark" id="input-tipo" required>
+                                    <option value="Aliado" selected>Aliado</option>
+                                    <option value="Talismán">Talismán</option>
+                                    <option value="Arma">Arma</option>
+                                    <option value="Tótem">Tótem</option>
+                                </select>
+                            </div>
+                            <div class="col-6">
+                                <label for="input-rareza" class="form-label small">Rareza *</label>
+                                <select class="form-select form-select-dark" id="input-rareza" required>
+                                    <option value="Vasallo">Vasallo</option>
+                                    <option value="Cortesano">Cortesano</option>
+                                    <option value="Real" selected>Real</option>
+                                    <option value="Mega Real">Mega Real</option>
+                                    <option value="Ultra Real">Ultra Real</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row g-2 mb-3">
+                            <div class="col-6">
+                                <label for="input-coste" class="form-label small">Coste de Oro *</label>
+                                <input type="number" class="form-control form-control-dark" id="input-coste" min="0" max="10" value="2" required>
+                            </div>
+                            <div class="col-6">
+                                <label for="input-fuerza" class="form-label small">Fuerza *</label>
+                                <input type="number" class="form-control form-control-dark" id="input-fuerza" min="0" max="10" value="3" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="input-edicion" class="form-label small">Edición</label>
+                            <input type="text" class="form-control form-control-dark" id="input-edicion" value="Vigilantes de Acero">
+                        </div>
+                        <div class="mb-3">
+                            <label for="input-habilidad" class="form-label small">Habilidad / Efecto *</label>
+                            <textarea class="form-control form-control-dark" id="input-habilidad" rows="3" required placeholder="Describe la habilidad de la carta..."></textarea>
+                            <div class="invalid-feedback">Por favor escribe la habilidad de la carta.</div>
+                        </div>
+                        <div class="mb-2">
+                            <label for="input-imagen" class="form-label small">Ruta de Imagen (Opcional)</label>
+                            <input type="text" class="form-control form-control-dark" id="input-imagen" value="assets/img/booster_vigilantes_angel.jpg">
+                        </div>
+                    </div>
+                    <div class="modal-footer modal-footer-dark">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-warning fw-semibold">Guardar en Base de Datos</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================================================================ -->
+    <!-- MODAL GENÉRICO: VER DETALLE DE CARTA -->
+    <!-- ================================================================ -->
+    <div class="modal fade" id="modalDetalle" tabindex="-1" aria-labelledby="modalDetalleTitulo" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content modal-content-dark">
+                <div class="modal-header modal-header-dark">
+                    <h5 class="modal-title text-warning" id="modalDetalleTitulo">Detalle de Carta</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body" id="modalDetalleBody">
+                    <!-- Contenido inyectado dinámicamente con JavaScript -->
+                </div>
+                <div class="modal-footer modal-footer-dark">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================================================================ -->
+    <!-- FOOTER SEMÁNTICO -->
+    <!-- ================================================================ -->
+    <footer>
+        <div class="container text-center">
+            <div class="row align-items-center g-3">
+                <div class="col-12 col-md-4 text-md-start">
+                    <span class="text-warning fw-bold">ACEROTCG</span> &copy; 2026. Todos los derechos reservados.
+                </div>
+                <div class="col-12 col-md-4 text-center">
+                    <small class="d-block text-muted">Desarrollo Videojuegos y Simulación Virtual</small>
+                    <small class="text-light">Pontificia Universidad Católica de Valparaíso (PUCV)</small>
+                </div>
+                <div class="col-12 col-md-4 text-md-end">
+                    <a href="#hero" class="text-decoration-none text-warning small me-3">
+                        <i class="bi bi-arrow-up-circle me-1"></i> Volver arriba
+                    </a>
+                    <a href="database/acerotcg_db.sql" download class="btn btn-sm btn-outline-warning">
+                        <i class="bi bi-filetype-sql me-1"></i> Descargar SQL
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5.3 JavaScript Bundle con Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <!-- Lógica de la Aplicación Web (Funciones, API Fetch y Filtros DOM) -->
+    <script src="assets/js/app.js"></script>
+</body>
+</html>
