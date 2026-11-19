@@ -9,3 +9,5 @@ database/acerotcg.sqlite-journal
 
 GUIA_DEFENSA.md
 *.pdf
+server/generar_guia_pdf.py
+server/test-api.js
